@@ -14,35 +14,41 @@ public class ProductCatalog {
         return productStorage.allProducts();
     }
 
-    public String addProduct(String name, String description) {
-        Product newProduct = new Product(
-                UUID.randomUUID(),
-                name,
-                description
-        );
+    public String addProduct(String name, String desc) {
+        Product newOne = new Product(UUID.randomUUID(), name, desc);
 
-        productStorage.add(newProduct);
-
-        return newProduct.getId();
+        productStorage.add(newOne);
+        return newOne.getId();
     }
 
     public Product loadById(String productId) {
         return productStorage.loadById(productId);
     }
 
-    public void changePrice(String productId, BigDecimal price) {
-        productStorage.loadById(productId).setPrice(price);
+    public void changePrice(String productId, BigDecimal newPrice) {
+        Product loaded = productStorage.loadById(productId);
+        loaded.changePrice(newPrice);
     }
 
     public void assignImage(String productId, String imageKey) {
-        productStorage.loadById(productId).setImageKey(imageKey);
-    }
-
-    public void publishProduct(String productId) {
-        productStorage.loadById(productId).setPublished(true);
+        Product loaded = productStorage.loadById(productId);
+        loaded.setImage(imageKey);
     }
 
     public List<Product> allPublishedProducts() {
         return productStorage.allPublishedProducts();
+    }
+
+    public void publishProduct(String productId) {
+        Product loaded = loadById(productId);
+        if (loaded.getPrice() == null) {
+            throw new ProductCantBePublished();
+        }
+
+        if (loaded.getImageKey() == null) {
+            throw new ProductCantBePublished();
+        }
+
+        loaded.setOnline();
     }
 }

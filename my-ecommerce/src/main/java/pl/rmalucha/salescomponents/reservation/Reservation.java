@@ -1,7 +1,7 @@
-package pl.rmalucha.sales;
+package pl.rmalucha.salescomponents.reservation;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import java.math.BigDecimal;
 

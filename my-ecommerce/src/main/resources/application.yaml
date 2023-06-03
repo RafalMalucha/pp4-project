@@ -16,9 +16,3 @@ spring:
     console:
       enabled: true
       path: /h2
-
-CREATE TABLE `products` (
-`id` varchar(100) NOT NULL,
-`name` varchar(100),
-PRIMARY KEY(id)
-)

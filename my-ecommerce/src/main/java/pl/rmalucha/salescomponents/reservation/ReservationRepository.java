@@ -1,4 +1,4 @@
-package pl.rmalucha.sales;
+package pl.rmalucha.salescomponents.reservation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

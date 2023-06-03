@@ -1,13 +1,12 @@
 package pl.rmalucha.productcatalog;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class HashMapProductStorage implements ProductStorage {
-    private final Map<String, Product> products;
+    Map<String, Product> products;
 
     public HashMapProductStorage() {
         this.products = new HashMap<>();
@@ -15,7 +14,7 @@ public class HashMapProductStorage implements ProductStorage {
 
     @Override
     public List<Product> allProducts() {
-        return new ArrayList<>(products.values());
+        return products.values().stream().collect(Collectors.toList());
     }
 
     @Override
@@ -30,9 +29,6 @@ public class HashMapProductStorage implements ProductStorage {
 
     @Override
     public List<Product> allPublishedProducts() {
-        return products.values()
-                .stream()
-                .filter(Product::isPublished)
-                .collect(Collectors.toList());
+        return products.values().stream().filter(Product::isOnline).collect(Collectors.toList());
     }
 }

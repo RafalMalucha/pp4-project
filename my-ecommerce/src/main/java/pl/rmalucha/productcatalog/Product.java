@@ -4,64 +4,54 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 public class Product {
-
-    private UUID productId;
-    private String name;
-    private String description;
+    private final String uuid;
+    private final String name;
+    private final String desc;
     private BigDecimal price;
     private String imageKey;
-    private boolean isPublished;
+    private boolean online;
 
-    public Product(UUID productId, String name, String description) {
-        this.productId = productId;
+    public Product(UUID uuid, String name, String desc) {
+        this.uuid = uuid.toString();
         this.name = name;
-        this.description = description;
+        this.desc = desc;
     }
 
     public String getId() {
-        return this.productId.toString();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        return uuid;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void changePrice(BigDecimal newPrice) {
+
+        price = newPrice;
     }
 
     public String getImageKey() {
         return imageKey;
     }
 
-    public void setImageKey(String imageKey) {
+    public void setImage(String imageKey) {
+
         this.imageKey = imageKey;
     }
 
-    public boolean isPublished() {
-        return isPublished;
+    public void setOnline() {
+        this.online = true;
     }
 
-    public void setPublished(boolean published) {
-        if (published && (price == null || imageKey == null)) {
-            throw new ProductCantBePublished();
-        }
-        isPublished = published;
+    public boolean isOnline() {
+        return online;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 }
